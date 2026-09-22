@@ -2,38 +2,89 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-const services = [
+interface ServiceItem {
+  id: string;
+  badge: string;
+  title: string;
+  description: string;
+  features: string[];
+  outcome: string;
+  image: string;
+  gradient: string;
+}
+
+const servicesData: ServiceItem[] = [
   {
+    id: "01",
+    badge: "01",
     title: "App & Web-App Design",
     description:
-      "We design intuitive digital experiences that solve real user problems and create seamless experiences your users will love.",
-    features: ["UX Strategy", "Wireframes", "UI Design", "Design Systems", "Prototype", "Developer Handoff"],
-    outcome: "Launch-ready products users understand instantly and enjoy using daily.",
+      "We design intuitive digital experiences that solve real user problems and create seamless experiences your users would love.",
+    features: [
+      "UX Strategy",
+      "Wireframes",
+      "UI Design",
+      "Design Systems",
+      "Prototype",
+      "Developer Handoff",
+    ],
+    outcome: "Launch ready products users understand instantly and enjoy using daily.",
     image: "/assets/service-carbon.png",
+    gradient: "linear-gradient(292deg, rgba(255,255,255,1) 19%, rgba(176,182,255,1) 100%)",
   },
   {
+    id: "02",
+    badge: "02",
     title: "Landing Page & Website Designs",
     description:
       "We design modern websites and landing pages that communicate value clearly and turn visitors into customers.",
-    features: ["Landing Pages", "SaaS Websites", "Responsive Design", "Webflow-Ready Files", "Motion Direction", "SEO-Friendly Structure"],
+    features: [
+      "Landing Pages",
+      "SaaS Websites",
+      "Responsive Design",
+      "Webflow-Ready Files",
+      "Motion Direction",
+      "SEO-Friendly Structure",
+    ],
     outcome: "High-performing digital experiences built to drive trust, engagement, and action.",
     image: "/assets/service-quid.png",
+    gradient: "linear-gradient(68deg, rgba(255,255,255,1) 19%, rgba(180,200,255,1) 100%)",
   },
   {
+    id: "03",
+    badge: "03",
     title: "Front & Backend Development",
     description:
       "We build fast, secure, and scalable web and mobile applications using modern technologies tailored to your business.",
-    features: ["Responsive Frontend", "Backend Development", "API Integration", "Authentication & Security", "Database Design", "Deployment"],
+    features: [
+      "Responsive Frontend",
+      "Backend Development",
+      "API Integration",
+      "Authentication & Security",
+      "Database Design",
+      "Deployment",
+    ],
     outcome: "Robust applications that are secure, scalable, and ready for growth.",
     image: "/assets/service-code.png",
+    gradient: "linear-gradient(292deg, rgba(255,255,255,1) 19%, rgba(176,182,255,1) 100%)",
   },
   {
+    id: "04",
+    badge: "04",
     title: "Brand Identity & Design System",
     description:
       "We create structured design systems that help products stay visually consistent as teams and features grow.",
-    features: ["Component Libraries", "Auto Layout Systems", "Design Tokens", "Documentation", "Style Guides", "Team Enablement"],
+    features: [
+      "Component Libraries",
+      "Auto Layout Systems",
+      "Design Tokens",
+      "Documentation",
+      "Style Guides",
+      "Team Enablement",
+    ],
     outcome: "A flexible visual foundation shared by design and development teams.",
     image: "/assets/project-carbon.png",
+    gradient: "linear-gradient(68deg, rgba(255,255,255,1) 19%, rgba(200,210,255,1) 100%)",
   },
 ];
 
@@ -145,7 +196,7 @@ export function HeroSection() {
                 src={src} 
                 alt={alt} 
                 fill 
-                priority // <--- ADD THIS PROP HERE
+                priority
                 sizes="(max-width: 768px) 45vw, 300px" 
               />
             </div>
@@ -165,7 +216,6 @@ export function HeroSection() {
     </section>
   );
 }
-
 
 export function AboutSection() {
   const stats = [
@@ -218,30 +268,123 @@ export function AboutSection() {
 
 export function ServicesSection() {
   return (
-    <section id="services" className="section section-tint">
-      <div className="site-container">
+    <section id="services" className="w-full py-16 md:py-24 bg-transparent">
+      <div className="site-container mx-auto flex flex-col items-center">
+        
+        {/* Section Header */}
         <SectionHeading
           eyebrow="OUR SERVICES"
-          title={<>Designs built to <em>scale fast.</em></>}
+          title={
+            <>
+              Designs built to <br />
+              <em>scale fast.</em>
+            </>
+          }
           description="We help teams craft products, brands, and digital experiences that launch beautifully and grow confidently."
         />
-        <div className="services-list">
-          {services.map((service, index) => (
-            <article className={`service-card ${index % 2 ? "service-reverse" : ""}`} key={service.title}>
-              <div className="service-content">
-                <span className="service-index">{String(index + 1).padStart(2, "0")}</span>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <h4>WHAT YOU GET</h4>
-                <ul>{service.features.map((feature) => <li key={feature}>✓ {feature}</li>)}</ul>
-                <h4>✦ OUTCOME</h4>
-                <p className="outcome">{service.outcome}</p>
-              </div>
-              <div className="service-image">
-                <Image src={service.image} alt="" fill sizes="(max-width: 768px) 100vw, 45vw" />
-              </div>
-            </article>
-          ))}
+
+        {/* Services Cards List */}
+        <div className="flex flex-col gap-8 md:gap-10 w-full items-center">
+          {servicesData.map((service, index) => {
+            const isReversed = index % 2 === 1;
+
+            return (
+              <article
+                key={service.id}
+                className="w-full max-w-303.25 bg-white rounded-3xl md:rounded-[40px] border border-gray-100 shadow-sm p-6 md:p-10 lg:p-12 overflow-hidden"
+              >
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                  
+                  {/* Text Details Column */}
+                  <div
+                    className={`flex flex-col gap-6 md:gap-8 ${
+                      isReversed ? "lg:order-2" : "lg:order-1"
+                    }`}
+                  >
+                    {/* Header with Badge & Title */}
+                    <div className="flex items-start gap-4 md:gap-5">
+                      <div
+                        className="w-10 h-10 md:w-12 md:h-12 shrink-0 bg-azuri-500 rounded-full flex items-center justify-center text-white font-semibold text-base md:text-lg"
+                        aria-hidden="true"
+                      >
+                        {service.badge}
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <h3 className="font-medium text-black text-2xl md:text-[32px] tracking-tight leading-tight">
+                          {service.title}
+                        </h3>
+                        <p className="font-normal text-[#767779] text-base md:text-lg tracking-tight leading-relaxed">
+                          {service.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Checklist: WHAT YOU GET */}
+                    <div className="flex flex-col gap-3">
+                      <h4 className="font-medium text-azuri-500 text-xs md:text-sm tracking-wider uppercase">
+                        WHAT YOU GET
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+                        {service.features.map((feature) => (
+                          <div key={feature} className="flex items-center gap-3">
+                            <span className="w-5 h-5 md:w-6 md:h-6 rounded-full border border-azuri-500 flex items-center justify-center shrink-0">
+                              <svg
+                                className="w-3 h-3 md:w-3.5 md:h-3.5 text-azuri-500"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            </span>
+                            <span className="font-medium text-[#767779] text-sm md:text-base">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Outcome */}
+                    <div className="flex flex-col gap-1.5 pt-4 border-t border-gray-100">
+                      <div className="flex items-center gap-2 text-azuri-500 font-medium text-xs md:text-sm tracking-wider uppercase">
+                        <span>✦</span>
+                        <span>OUTCOME</span>
+                      </div>
+                      <p className="font-normal text-azuri-500 text-sm md:text-base leading-relaxed">
+                        {service.outcome}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Gradient Graphic Canvas Box */}
+                  <figure
+                    className={`relative w-full h-70 sm:h-90 md:h-105 rounded-2xl md:rounded-4xl overflow-hidden flex items-center justify-center p-6 md:p-10 ${
+                      isReversed ? "lg:order-1" : "lg:order-2"
+                    }`}
+                    style={{ background: service.gradient }}
+                  >
+                    {/* Inner wrapper with rounded radius, isolate context, and shadow */}
+                    <div className="relative w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-md isolate">
+                      <Image
+                        src={service.image}
+                        alt={`${service.title} showcase visual`}
+                        fill
+                        className="object-cover rounded-xl md:rounded-2xl"
+                        sizes="(max-width: 1024px) 100vw, 552px"
+                      />
+                    </div>
+                  </figure>
+
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
