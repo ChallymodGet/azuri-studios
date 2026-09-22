@@ -1,10 +1,35 @@
-import Image from "next/image";
+import Navbar from "@/components/layout/Navbar";
+import {
+  AboutSection,
+  FaqSection,
+  Footer,
+  GetStartedSection,
+  HeroSection,
+  PricingSection,
+  ProcessSection,
+  ProjectsSection,
+  ServicesSection,
+  TestimonialsSection,
+  WhyChooseUsSection,
+} from "@/components/sections/HomeSections";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Azuri Studios</h1>
-      <p className="mt-4 text-lg text-gray-400">Design & Digital Agency</p>
-    </main>
+    <>
+      <Navbar />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <ProcessSection />
+        <ProjectsSection />
+        <WhyChooseUsSection />
+        <PricingSection />
+        <TestimonialsSection />
+        <FaqSection />
+        <GetStartedSection />
+      </main>
+      <Footer />
+    </>
   );
 }
