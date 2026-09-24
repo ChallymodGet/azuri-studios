@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface ServiceItem {
   id: string;
@@ -183,7 +186,9 @@ export function HeroSection() {
               <Image key={avatar} src={`/assets/avatar-${avatar}.png`} alt="" width={40} height={40} />
             ))}
           </span>
-          <span>Join over <strong>20+</strong> Clients</span>
+          <span>
+            Join over <strong><AnimatedCounter target={20} suffix="+" /></strong> Clients
+          </span>
         </div>
       </div>
 
@@ -219,10 +224,10 @@ export function HeroSection() {
 
 export function AboutSection() {
   const stats = [
-    ["20+", "Projects delivered"],
-    ["98%", "Client retention rate"],
-    ["24hrs", "Avg. response time"],
-    ["4yrs", "Industry experience"],
+    { target: 20, suffix: "+", label: "Projects delivered" },
+    { target: 98, suffix: "%", label: "Client retention rate" },
+    { target: 24, suffix: "hrs", label: "Avg. response time" },
+    { target: 4, suffix: "yrs", label: "Industry experience" },
   ];
 
   return (
@@ -236,7 +241,7 @@ export function AboutSection() {
           <strong>We combine strategic thinking with refined execution to help teams launch confidently and grow beautifully.</strong>
         </p>
 
-        <div className="about-images flex items-center justify-center gap-4">
+        <div className="about-images flex items-center justify-center gap-4 my-8">
           {[1, 2, 3].map((image) => (
             <div 
               key={image} 
@@ -253,11 +258,22 @@ export function AboutSection() {
           ))}
         </div>
 
-        <div className="stats">
-          {stats.map(([value, label]) => (
-            <div key={label}>
-              <strong>{value}</strong>
-              <span>{label}</span>
+        {/* Updated Stats Container with Inline Size Overrides */}
+        <div className="stats grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl bg-blue-600 text-white text-center">
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col items-center">
+              <strong
+                style={{ fontSize: "52px", lineHeight: "1", fontWeight: "800" }}
+                className="text-white block tracking-tight"
+              >
+                <AnimatedCounter target={stat.target} suffix={stat.suffix} />
+              </strong>
+              <p
+                style={{ fontSize: "15px", marginTop: "8px" }}
+                className="font-medium text-white/90 block m-0 p-0"
+              >
+                {stat.label}
+              </p>
             </div>
           ))}
         </div>

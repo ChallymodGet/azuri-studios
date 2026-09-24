@@ -1,3 +1,4 @@
+import LoadingScreen from "@/components/ui/LoadingScreen";
 import Navbar from "@/components/layout/Navbar";
 import {
   AboutSection,
@@ -15,21 +16,27 @@ import {
 
 export default function Home() {
   return (
-    <>
+    <main className="relative min-h-screen pt-20">
+      {/* 1. Full-screen animated overlay */}
+      <LoadingScreen />
+
+      {/* 2. Top sticky/fixed navbar */}
       <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <ProcessSection />
-        <ProjectsSection />
-        <WhyChooseUsSection />
-        <PricingSection />
-        <TestimonialsSection />
-        <FaqSection />
-        <GetStartedSection />
-      </main>
+
+      {/* 3. Page Sections */}
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <ProcessSection />
+      <ProjectsSection />
+      <WhyChooseUsSection />
+      <PricingSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <GetStartedSection />
+
+      {/* 4. Footer */}
       <Footer />
-    </>
+    </main>
   );
 }
