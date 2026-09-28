@@ -33,7 +33,7 @@ const servicesData: ServiceItem[] = [
     ],
     outcome: "Launch ready products users understand instantly and enjoy using daily.",
     image: "/assets/service-carbon.png",
-    gradient: "linear-gradient(292deg, rgba(255,255,255,1) 19%, rgba(176,182,255,1) 100%)",
+    gradient: "linear-gradient(292deg, var(--azuri-figure-start) 19%, var(--azuri-figure-end) 100%)",
   },
   {
     id: "02",
@@ -51,7 +51,7 @@ const servicesData: ServiceItem[] = [
     ],
     outcome: "High-performing digital experiences built to drive trust, engagement, and action.",
     image: "/assets/service-quid.png",
-    gradient: "linear-gradient(68deg, rgba(255,255,255,1) 19%, rgba(180,200,255,1) 100%)",
+    gradient: "linear-gradient(68deg, var(--azuri-figure-start) 19%, var(--azuri-figure-end) 100%)",
   },
   {
     id: "03",
@@ -69,7 +69,7 @@ const servicesData: ServiceItem[] = [
     ],
     outcome: "Robust applications that are secure, scalable, and ready for growth.",
     image: "/assets/service-code.png",
-    gradient: "linear-gradient(292deg, rgba(255,255,255,1) 19%, rgba(176,182,255,1) 100%)",
+    gradient: "linear-gradient(292deg, var(--azuri-figure-start) 19%, var(--azuri-figure-end) 100%)",
   },
   {
     id: "04",
@@ -87,7 +87,7 @@ const servicesData: ServiceItem[] = [
     ],
     outcome: "A flexible visual foundation shared by design and development teams.",
     image: "/assets/project-carbon.png",
-    gradient: "linear-gradient(68deg, rgba(255,255,255,1) 19%, rgba(200,210,255,1) 100%)",
+    gradient: "linear-gradient(68deg, var(--azuri-figure-start) 19%, var(--azuri-figure-end) 100%)",
   },
 ];
 
@@ -307,7 +307,7 @@ export function ServicesSection() {
             return (
               <article
                 key={service.id}
-                className="w-full max-w-303.25 bg-white rounded-3xl md:rounded-[40px] border border-gray-100 shadow-sm p-6 md:p-10 lg:p-12 overflow-hidden"
+                className="w-full max-w-303.25 bg-(--azuri-surface) rounded-3xl md:rounded-[40px] border border-(--azuri-line) shadow-sm dark:shadow-black/30 p-6 md:p-10 lg:p-12 overflow-hidden"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                   
@@ -326,10 +326,10 @@ export function ServicesSection() {
                         {service.badge}
                       </div>
                       <div className="flex flex-col gap-2">
-                        <h3 className="font-medium text-black text-2xl md:text-[32px] tracking-tight leading-tight">
+                        <h3 className="font-medium text-(--azuri-ink) text-2xl md:text-[32px] tracking-tight leading-tight">
                           {service.title}
                         </h3>
-                        <p className="font-normal text-[#767779] text-base md:text-lg tracking-tight leading-relaxed">
+                        <p className="font-normal text-(--azuri-muted) text-base md:text-lg tracking-tight leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -358,7 +358,7 @@ export function ServicesSection() {
                                 />
                               </svg>
                             </span>
-                            <span className="font-medium text-[#767779] text-sm md:text-base">
+                            <span className="font-medium text-(--azuri-muted) text-sm md:text-base">
                               {feature}
                             </span>
                           </div>
@@ -367,7 +367,7 @@ export function ServicesSection() {
                     </div>
 
                     {/* Outcome */}
-                    <div className="flex flex-col gap-1.5 pt-4 border-t border-gray-100">
+                    <div className="flex flex-col gap-1.5 pt-4 border-t border-(--azuri-line)">
                       <div className="flex items-center gap-2 text-azuri-500 font-medium text-xs md:text-sm tracking-wider uppercase">
                         <span>✦</span>
                         <span>OUTCOME</span>
