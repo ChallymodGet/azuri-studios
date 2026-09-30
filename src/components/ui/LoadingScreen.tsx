@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Logo from "@/components/ui/Logo";
 
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
@@ -47,13 +48,8 @@ export default function LoadingScreen() {
       }`}
     >
       {/* Top Brand Logo */}
-      <div className="flex items-center gap-3">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-azuri-500 text-sm font-bold text-white">
-          A
-        </span>
-        <span className="font-semibold text-lg tracking-tight">
-          azuristudios.co
-        </span>
+      <div className="flex items-center text-white" aria-label="Azuri Studios">
+        <Logo height={36} />
       </div>
 
       {/* Middle Animated Centerpiece */}

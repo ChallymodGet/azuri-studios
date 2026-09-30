@@ -202,16 +202,11 @@ summary {
   letter-spacing: -0.05em;
 }
 
-.brand-mark {
-  display: grid;
-  width: 48px;
+/* Inline SVG logo: the wordmark inherits `color`, so it adapts to light/dark/footer */
+.brand-logo {
+  display: block;
   height: 48px;
-  place-items: center;
-  border-radius: 12px;
-  background: var(--azuri-blue);
-  color: white;
-  font-weight: 800;
-  box-shadow: inset 2px 2px 6px rgba(255, 255, 255, 0.35);
+  width: auto;
 }
 
 .desktop-nav {
@@ -228,6 +223,41 @@ summary {
 
 .desktop-nav a:hover {
   color: var(--azuri-blue);
+}
+
+/* Shown below 960px, where the inline links are hidden */
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--azuri-line);
+  border-radius: 50%;
+  background: var(--azuri-surface);
+  color: var(--azuri-ink);
+  cursor: pointer;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.menu-toggle:hover {
+  border-color: var(--azuri-blue);
+  color: var(--azuri-blue);
+}
+
+.menu-toggle:focus-visible {
+  outline: 2px solid var(--azuri-blue);
+  outline-offset: 2px;
+}
+
+.menu-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-nav {
+  display: none;
 }
 
 .button {
@@ -1185,10 +1215,6 @@ summary {
   min-height: 330px;
 }
 
-.footer-brand .brand-mark {
-  background: rgba(255, 255, 255, 0.12);
-}
-
 .footer-brand > p {
   max-width: 420px;
   margin: 18px 0 38px;
@@ -1250,6 +1276,39 @@ summary {
     display: none;
   }
 
+  .menu-toggle {
+    display: inline-grid;
+  }
+
+  .mobile-nav {
+    position: absolute;
+    z-index: 2;
+    top: calc(100% + 10px);
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    border: 1px solid var(--azuri-line);
+    border-radius: 24px;
+    background: var(--azuri-surface);
+    box-shadow: 0 18px 40px var(--azuri-shadow-strong);
+  }
+
+  .mobile-nav a {
+    padding: 14px 18px;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 550;
+  }
+
+  .mobile-nav a:hover,
+  .mobile-nav a:focus-visible {
+    background: var(--azuri-tint);
+    color: var(--azuri-blue);
+  }
+
   .hero {
     min-height: 1170px;
   }
@@ -1308,8 +1367,7 @@ summary {
     font-size: 17px;
   }
 
-  .brand-mark {
-    width: 40px;
+  .brand-logo {
     height: 40px;
   }
 
@@ -1324,12 +1382,14 @@ summary {
     gap: 8px;
   }
 
-  .theme-toggle {
+  .theme-toggle,
+  .menu-toggle {
     width: 40px;
     height: 40px;
   }
 
-  .theme-toggle svg {
+  .theme-toggle svg,
+  .menu-toggle svg {
     width: 18px;
     height: 18px;
   }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
+import Logo from "@/components/ui/Logo";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 interface ServiceItem {
@@ -588,7 +589,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="site-container footer-grid">
         <div className="footer-brand">
-          <div className="brand"><span className="brand-mark">A</span><span>azuristudios.co</span></div>
+          <div className="brand" aria-label="Azuri Studios"><Logo className="brand-logo" markFill="rgba(255, 255, 255, 0.12)" /></div>
           <p>World-class design and development for startups, founders, and growing teams.</p>
           <div className="socials"><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="X">𝕏</a></div>
         </div>

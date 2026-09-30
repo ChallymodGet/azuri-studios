@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import Logo from "@/components/ui/Logo";
 
 interface NavItem {
   label: string;
@@ -18,6 +19,8 @@ const navigationItems: NavItem[] = [
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,8 +32,33 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    // The menu only exists below the desktop breakpoint; close it if the viewport grows.
+    const handleResize = () => {
+      if (window.innerWidth > 960) setIsMenuOpen(false);
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setIsMenuOpen(false);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMenuOpen]);
+
   return (
     <header
+      ref={headerRef}
       className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ease-in-out ${
         isScrolled
           ? "top-4 w-[calc(100%-2rem)] max-w-300 bg-white/80 dark:bg-[#0a0a12]/85 backdrop-blur-md border border-gray-200/80 dark:border-white/10 shadow-lg dark:shadow-black/40 rounded-full py-2.5 px-6"
@@ -39,10 +67,7 @@ export default function Navbar() {
     >
       <div className="site-container navbar-inner flex items-center justify-between w-full mx-auto py-0! my-0!">
         <Link href="/" className="brand" aria-label="Azuri Studios home">
-          <span className="brand-mark" aria-hidden="true">
-            A
-          </span>
-          <span>azuristudios.co</span>
+          <Logo className="brand-logo" />
         </Link>
 
         <nav className="desktop-nav" aria-label="Primary navigation">
@@ -58,8 +83,42 @@ export default function Navbar() {
           <Link href="#contact" className="button button-primary navbar-cta">
             Get started
           </Link>
+          <button
+            type="button"
+            className="menu-toggle"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((open) => !open)}
+          >
+            <svg
+              className={isMenuOpen ? "icon-close" : "icon-menu"}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
+              {isMenuOpen ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </div>
+
+      {isMenuOpen && (
+        <nav id="mobile-navigation" className="mobile-nav" aria-label="Primary navigation">
+          {navigationItems.map((item) => (
+            <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
