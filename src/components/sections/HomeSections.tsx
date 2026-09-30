@@ -175,13 +175,22 @@ export function HeroSection() {
   return (
     <section className="hero">
       <div className="site-container hero-copy">
-        <h1>Hire <em>world-class</em><br />tech agency</h1>
-        <p>We design, develop, and launch cutting-edge solutions that help startups and enterprises stay ahead of the curve.</p>
-        <div className="button-row">
+        {/* Each word rises out of its own clipped mask, one beat apart (see .hero-word) */}
+        <h1>
+          <span className="hero-word"><span>Hire</span></span>{" "}
+          <span className="hero-word"><em>world-class</em></span>
+          <br />
+          <span className="hero-word"><span>tech</span></span>{" "}
+          <span className="hero-word"><span>agency</span></span>
+        </h1>
+        <p className="hero-enter" style={{ "--enter-delay": "520ms" } as React.CSSProperties}>
+          We design, develop, and launch cutting-edge solutions that help startups and enterprises stay ahead of the curve.
+        </p>
+        <div className="button-row hero-enter" style={{ "--enter-delay": "660ms" } as React.CSSProperties}>
           <Link href="#projects" className="button button-secondary">See projects</Link>
           <Link href="#contact" className="button button-primary">Book a call</Link>
         </div>
-        <div className="client-proof">
+        <div className="client-proof hero-enter" style={{ "--enter-delay": "800ms" } as React.CSSProperties}>
           <span className="avatar-stack">
             {[1, 2, 3, 4].map((avatar) => (
               <Image key={avatar} src={`/assets/avatar-${avatar}.png`} alt="" width={40} height={40} />
@@ -213,11 +222,20 @@ export function HeroSection() {
 
       <div className="trusted-strip">
         <span>TRUSTED BY:</span>
-        <strong>ATLASSIAN<br />loom</strong>
-        <strong>Ɲ <small>Nexora</small></strong>
-        <strong>verve</strong>
-        <strong>azuri <small>studio</small></strong>
-        <strong>▮▮ Borophone</strong>
+        {/* Two identical groups scroll as one seamless loop; hovering pauses it */}
+        <div className="marquee">
+          <div className="marquee-track">
+            {[0, 1].map((copy) => (
+              <div className="marquee-group" key={copy} aria-hidden={copy === 1}>
+                <strong>ATLASSIAN<br />loom</strong>
+                <strong>Ɲ <small>Nexora</small></strong>
+                <strong>verve</strong>
+                <strong>azuri <small>studio</small></strong>
+                <strong>▮▮ Borophone</strong>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -233,20 +251,25 @@ export function AboutSection() {
 
   return (
     <section id="about-us" className="section section-tint">
-      <div className="site-container about-card">
-        <p className="section-eyebrow">ABOUT US</p>
-        
-        <p className="about-statement">
-          <strong>azuri is a product focused design studio</strong>{" "}
-          <span>crafting brands, interfaces, and scalable systems for modern startups.</span>{" "}
-          <strong>We combine strategic thinking with refined execution to help teams launch confidently and grow beautifully.</strong>
-        </p>
+      <div className="site-container about-card" data-reveal="scale">
+        <div data-reveal-group="140">
+          <p className="section-eyebrow" data-reveal>ABOUT US</p>
 
-        <div className="about-images flex items-center justify-center gap-4 my-8">
+          {/* The statement lands in three beats */}
+          <p className="about-statement">
+            <strong data-reveal="blur">azuri is a product focused design studio</strong>{" "}
+            <span data-reveal="blur">crafting brands, interfaces, and scalable systems for modern startups.</span>{" "}
+            <strong data-reveal="blur">We combine strategic thinking with refined execution to help teams launch confidently and grow beautifully.</strong>
+          </p>
+        </div>
+
+        {/* Photos fan out from a rotated stack (see .about-photo) */}
+        <div className="about-images flex items-center justify-center gap-4 my-8" data-reveal-group="110">
           {[1, 2, 3].map((image) => (
-            <div 
-              key={image} 
-              className="relative w-full max-w-55 h-35 overflow-hidden rounded-2xl"
+            <div
+              key={image}
+              className="about-photo relative w-full max-w-55 h-35 overflow-hidden rounded-2xl"
+              data-reveal="fan"
             >
               <Image
                 src={`/assets/about-${image}.png`}
@@ -260,9 +283,9 @@ export function AboutSection() {
         </div>
 
         {/* Always four-up; number and label sizes scale with the viewport (see .stats in globals.css) */}
-        <div className="stats">
+        <div className="stats" data-reveal-group="120">
           {stats.map((stat) => (
-            <div key={stat.label}>
+            <div key={stat.label} data-reveal="pop">
               <strong>
                 <AnimatedCounter target={stat.target} suffix={stat.suffix} />
               </strong>
@@ -300,20 +323,23 @@ export function ServicesSection() {
             return (
               <article
                 key={service.id}
-                className="w-full max-w-303.25 bg-(--azuri-surface) rounded-3xl md:rounded-[40px] border border-(--azuri-line) shadow-sm dark:shadow-black/30 p-6 md:p-10 lg:p-12 overflow-hidden"
+                className="service-panel w-full bg-(--azuri-surface) rounded-3xl md:rounded-[40px] border border-(--azuri-line) shadow-sm dark:shadow-black/30 p-6 md:p-10 lg:p-12 overflow-hidden"
+                data-reveal-group="90"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
                   
-                  {/* Text Details Column */}
+                  {/* Text column — slides in from the side opposite the figure */}
                   <div
-                    className={`flex flex-col gap-6 md:gap-8 ${
+                    className={`service-copy flex min-w-0 flex-col gap-6 md:gap-8 ${
                       isReversed ? "lg:order-2" : "lg:order-1"
                     }`}
+                    data-reveal={isReversed ? "right" : "left"}
+                    data-delay="0"
                   >
                     {/* Header with Badge & Title */}
                     <div className="flex items-start gap-4 md:gap-5">
                       <div
-                        className="w-10 h-10 md:w-12 md:h-12 shrink-0 bg-azuri-500 rounded-full flex items-center justify-center text-white font-semibold text-base md:text-lg"
+                        className="service-badge w-10 h-10 md:w-12 md:h-12 shrink-0 bg-azuri-500 rounded-full flex items-center justify-center text-white font-semibold text-base md:text-lg"
                         aria-hidden="true"
                       >
                         {service.badge}
@@ -334,9 +360,14 @@ export function ServicesSection() {
                         WHAT YOU GET
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
-                        {service.features.map((feature) => (
-                          <div key={feature} className="flex items-center gap-3">
+                        {service.features.map((feature, featureIndex) => (
+                          <div
+                            key={feature}
+                            className="service-feature flex items-center gap-3"
+                            style={{ "--feature-i": featureIndex } as React.CSSProperties}
+                          >
                             <span className="w-5 h-5 md:w-6 md:h-6 rounded-full border border-azuri-500 flex items-center justify-center shrink-0">
+                              {/* The tick draws itself once the row is in view (see .check-path) */}
                               <svg
                                 className="w-3 h-3 md:w-3.5 md:h-3.5 text-azuri-500"
                                 fill="none"
@@ -345,6 +376,7 @@ export function ServicesSection() {
                                 strokeWidth="2.5"
                               >
                                 <path
+                                  className="check-path"
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
                                   d="M5 13l4 4L19 7"
@@ -373,13 +405,15 @@ export function ServicesSection() {
 
                   {/* Gradient Graphic Canvas Box */}
                   <figure
-                    className={`relative w-full h-70 sm:h-90 md:h-105 rounded-2xl md:rounded-4xl overflow-hidden flex items-center justify-center p-6 md:p-10 ${
+                    className={`service-figure relative min-h-0 w-full min-w-0 rounded-2xl md:rounded-4xl overflow-hidden flex items-center justify-center p-6 md:p-10 ${
                       isReversed ? "lg:order-1" : "lg:order-2"
                     }`}
                     style={{ background: service.gradient }}
+                    data-reveal={isReversed ? "left" : "right"}
+                    data-delay="140"
                   >
-                    {/* Inner wrapper with rounded radius, isolate context, and shadow */}
-                    <div className="relative w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-md isolate">
+                    {/* Tilt + image zoom on the inner frame so the grid column keeps full width */}
+                    <div className="service-shot relative h-full min-h-[240px] w-full rounded-xl md:rounded-2xl overflow-hidden shadow-md isolate" data-tilt="5">
                       <Image
                         src={service.image}
                         alt={`${service.title} showcase visual`}
@@ -409,10 +443,11 @@ export function ProcessSection() {
           title={<>Brief-to-Launch in <em>four steps</em></>}
           description="All plans include unlimited revisions, full IP ownership, and a 2-week money-back guarantee. Pause or cancel anytime."
         />
-        <div className="process-grid">
-          {processSteps.map(([number, title, copy]) => (
-            <article className="process-card" key={number}>
-              <span className="process-number">{number}</span>
+        <div className="process-grid" data-reveal-group="140">
+          {processSteps.map(([number, title, copy], index) => (
+            <article className="process-card" key={number} data-reveal="up" data-delay={String(index * 140)}>
+              {/* Ghost number slides up a beat after its card */}
+              <span className="process-number" data-reveal="up" data-delay={String(index * 140 + 260)}>{number}</span>
               <span className="process-icon">✦</span>
               <h3>{title}</h3>
               <p>{copy}</p>
@@ -434,16 +469,17 @@ export function ProjectsSection() {
           title={<>Designing digital experiences that drive <em>real impact.</em></>}
           description="A selection of our recent work across product design, branding, web experiences, and more."
         />
-        <div className="project-toolbar">
-          <div>{filters.map((filter) => <button className={filter === "Landing Page" ? "active" : ""} key={filter}>{filter}</button>)}</div>
-          <Link href="#contact" className="button button-primary button-small">See all projects ↗</Link>
+        <div className="project-toolbar" data-reveal-group="60">
+          <div>{filters.map((filter) => <button className={filter === "Landing Page" ? "active" : ""} key={filter} data-reveal="pop">{filter}</button>)}</div>
+          <Link href="#contact" className="button button-primary button-small" data-reveal="right">See all projects ↗</Link>
         </div>
-        <article className="featured-project">
-          <div className="project-meta"><div><strong>Bloom</strong><span>Landing Page · 2025</span></div><b>1/<span>5</span></b></div>
-          <div className="project-preview">
+        <article className="featured-project" data-reveal-group="120">
+          <div className="project-meta" data-reveal><div><strong>Bloom</strong><span>Landing Page · 2025</span></div><b>1/<span>5</span></b></div>
+          {/* Preview wipes open from the bottom edge */}
+          <div className="project-preview" data-reveal="clip" data-delay="160">
             <Image src="/assets/project-quid.png" alt="Bloom landing page project" fill sizes="(max-width: 768px) 90vw, 720px" />
           </div>
-          <div className="project-arrows"><button aria-label="Previous project">←</button><button aria-label="Next project">→</button></div>
+          <div className="project-arrows" data-reveal="pop" data-delay="520"><button aria-label="Previous project">←</button><button aria-label="Next project">→</button></div>
         </article>
       </div>
     </section>
@@ -459,13 +495,14 @@ export function WhyChooseUsSection() {
           title={<>Why <span className="azuri-badge">azuri</span> beats every <em>alternative.</em></>}
           description="We built Azuri to solve the exact problems founders have with agencies, freelancers, and in-house hires."
         />
-        <div className="comparison-wrap">
-          <div className="comparison-grid comparison-header">
+        <div className="comparison-wrap" data-reveal-group="80">
+          <div className="comparison-grid comparison-header" data-reveal>
             {["Features", "Traditional Agency", "Freelancer", "In house hire", "azuri"].map((item) => <strong key={item}>{item}</strong>)}
           </div>
+          {/* Rows cascade in; the azuri ticks spring in just after each row lands */}
           {comparison.map((row) => (
-            <div className="comparison-grid comparison-row" key={row[0]}>
-              {row.map((cell, index) => <span className={index === 4 ? "azuri-cell" : cell === "—" ? "negative" : ""} key={`${row[0]}-${index}`}>{cell}</span>)}
+            <div className="comparison-grid comparison-row" key={row[0]} data-reveal>
+              {row.map((cell, index) => <span className={index === 4 ? "azuri-cell" : cell === "—" ? "negative" : ""} key={`${row[0]}-${index}`}>{index === 4 ? <i className="tick">{cell}</i> : cell}</span>)}
             </div>
           ))}
         </div>
@@ -483,19 +520,29 @@ export function PricingSection() {
           title={<>Transparent <em>Pricing</em><br />No Surprises.</>}
           description="All plans include unlimited revisions, full IP ownership, and a 2-week money-back guarantee. Pause or cancel anytime."
         />
-        <div className="pricing-grid">
-          {plans.map((plan) => (
-            <article className={`pricing-card ${plan.featured ? "pricing-featured" : ""}`} key={plan.name}>
+        {/* Outer cards first, featured plan lands last and a touch larger; features tick in per card */}
+        <div className="pricing-grid" data-reveal-group>
+          {plans.map((plan, planIndex) => {
+            const cardDelay = plan.featured ? 320 : planIndex * 120;
+            return (
+            <article
+              className={`pricing-card ${plan.featured ? "pricing-featured" : ""}`}
+              key={plan.name}
+              data-reveal={plan.featured ? "scale" : "up"}
+              data-delay={String(cardDelay)}
+              data-tilt="3"
+            >
               <p className="plan-name">{plan.name}</p>
               <p className="plan-price"><sup>$</sup>{plan.price}<span>/ month.</span><small> pause anytime</small></p>
               <p className="plan-description">{plan.description}</p>
               <ul>
-                {plan.features.map((feature) => <li key={feature}><span>✓</span>{feature}</li>)}
-                {plan.unavailable?.map((feature) => <li className="unavailable" key={feature}><span>×</span>{feature}</li>)}
+                {plan.features.map((feature, i) => <li key={feature} data-reveal="left" data-delay={String(cardDelay + 300 + i * 60)}><span>✓</span>{feature}</li>)}
+                {plan.unavailable?.map((feature, i) => <li className="unavailable" key={feature} data-reveal="left" data-delay={String(cardDelay + 300 + (plan.features.length + i) * 60)}><span>×</span>{feature}</li>)}
               </ul>
               <Link href="#contact" className={`button ${plan.featured ? "button-light" : "button-primary"}`}>Get started</Link>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -512,17 +559,23 @@ export function TestimonialsSection() {
           description="Don't take our word for it — here's what 20+ teams have to say about working with us."
         />
         <div className="testimonials">
+          {/* Photo slides in from the left, the quote card from the right, then the stars light up one by one */}
           {testimonials.map((testimonial) => (
-            <article className="testimonial" key={testimonial.quote}>
-              <div className="testimonial-image"><Image src={testimonial.image} alt="" fill sizes="(max-width: 768px) 100vw, 420px" /></div>
-              <div className="quote-card">
+            <article className="testimonial" key={testimonial.quote} data-reveal-group>
+              <div className="testimonial-image" data-reveal="left" data-delay="0" data-tilt="4"><Image src={testimonial.image} alt="" fill sizes="(max-width: 768px) 100vw, 420px" /></div>
+              <div className="quote-card" data-reveal="right" data-delay="120">
                 <blockquote>“{testimonial.quote}”</blockquote>
-                <div><span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span><b aria-label="5 out of 5 stars">★★★★★</b></div>
+                <div>
+                  <span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span>
+                  <b aria-label="5 out of 5 stars">
+                    {[0, 1, 2, 3, 4].map((star) => <i key={star} data-reveal="pop" data-delay={String(420 + star * 80)}>★</i>)}
+                  </b>
+                </div>
               </div>
             </article>
           ))}
         </div>
-        <div className="carousel-dots"><i /><i /><i /><i /></div>
+        <div className="carousel-dots" data-reveal><i /><i /><i /><i /></div>
       </div>
     </section>
   );
@@ -537,15 +590,15 @@ export function FaqSection() {
           title={<>Got <em>Questions?</em><br />We’ve got <em>Answers!</em></>}
           description="All plans include unlimited revisions, full IP ownership, and a 2-week money-back guarantee. Pause or cancel anytime."
         />
-        <div className="faq-list">
+        <div className="faq-list" data-reveal-group="90">
           {faqs.map(([question, answer], index) => (
-            <details key={question} open={index === 0}>
+            <details key={question} open={index === 0} data-reveal>
               <summary>{question}<span /></summary>
               <p>{answer}</p>
             </details>
           ))}
         </div>
-        <div className="faq-cta">
+        <div className="faq-cta" data-reveal="scale">
           <div><strong>Can&apos;t find what you need?</strong><span>Book a free 30-min call and we&apos;ll walk you through everything.</span></div>
           <Link href="#contact" className="button button-primary">Book a call</Link>
         </div>
@@ -556,10 +609,11 @@ export function FaqSection() {
 
 export function GetStartedSection() {
   return (
-    <section id="contact" className="section cta-section">
-      <div className="floating-tile tile-one">●</div>
-      <div className="floating-tile tile-two">◆</div>
-      <div className="floating-tile tile-three">✦</div>
+    <section id="contact" className="section cta-section" data-reveal-group="120">
+      {/* Tiles drop in, then bob forever (see .floating-tile) */}
+      <div className="floating-tile tile-one" data-reveal="drop" data-delay="200">●</div>
+      <div className="floating-tile tile-two" data-reveal="drop" data-delay="340">◆</div>
+      <div className="floating-tile tile-three" data-reveal="drop" data-delay="480">✦</div>
       <div className="site-container">
         <SectionHeading
           eyebrow="GET STARTED"
@@ -567,10 +621,10 @@ export function GetStartedSection() {
           description="Join 200+ startups building faster with Azuri. First delivery within 48 hours of onboarding — guaranteed."
         />
         <div className="button-row">
-          <Link href="#projects" className="button button-secondary">See projects</Link>
-          <a href="mailto:hello@azuristudio.co" className="button button-primary">Book a call</a>
+          <Link href="#projects" className="button button-secondary" data-reveal="pop" data-delay="420">See projects</Link>
+          <a href="mailto:hello@azuristudio.co" className="button button-primary" data-reveal="pop" data-delay="500">Book a call</a>
         </div>
-        <p className="cta-note">No long-term contracts · Pause or cancel anytime · 2-week money-back guarantee</p>
+        <p className="cta-note" data-reveal data-delay="620">No long-term contracts · Pause or cancel anytime · 2-week money-back guarantee</p>
       </div>
     </section>
   );
@@ -578,9 +632,9 @@ export function GetStartedSection() {
 
 export function Footer() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" data-reveal-group="110">
       <div className="site-container footer-grid">
-        <div className="footer-brand">
+        <div className="footer-brand" data-reveal>
           <div className="brand" aria-label="Azuri Studios"><Logo className="brand-logo" markFill="rgba(255, 255, 255, 0.12)" /></div>
           <p>World-class design and development for startups, founders, and growing teams.</p>
           <div className="socials"><a href="#" aria-label="LinkedIn">in</a><a href="#" aria-label="Facebook">f</a><a href="#" aria-label="X">𝕏</a></div>
@@ -589,18 +643,19 @@ export function Footer() {
         <FooterLinks title="LEGAL" links={["Legal", "Privacy Policy", "Terms", "Refund Policy", "Cookies"]} />
         <FooterLinks title="COMPANY" links={["About us", "Work"]} />
       </div>
-      <div className="site-container footer-bottom">
+      <div className="site-container footer-bottom" data-reveal data-delay="500">
         <span>© 2026 azuristudios.co All rights reserved.</span>
         <a href="mailto:hello@azuristudio.co">✉ hello@azuristudio.co</a>
       </div>
-      <div className="footer-wordmark">azuristudios.co</div>
+      {/* Wordmark rises from below the fold */}
+      <div className="footer-wordmark" data-reveal="rise" data-delay="150">azuristudios.co</div>
     </footer>
   );
 }
 
 function FooterLinks({ title, links }: { title: string; links: string[] }) {
   return (
-    <div className="footer-links">
+    <div className="footer-links" data-reveal>
       <strong>{title}</strong>
       {links.map((link) => <a href="#" key={link}>{link}</a>)}
     </div>

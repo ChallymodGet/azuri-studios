@@ -14,10 +14,10 @@ export default function SectionHeading({
   className = "",
 }: SectionHeadingProps) {
   return (
-    <div className={`section-heading ${className}`}>
-      <p className="section-eyebrow">{eyebrow}</p>
-      <h2>{title}</h2>
-      {description ? <p className="section-description">{description}</p> : null}
+    <div className={`section-heading ${className}`} data-reveal-group="130">
+      <p className="section-eyebrow" data-reveal>{eyebrow}</p>
+      <h2 data-reveal="blur">{title}</h2>
+      {description ? <p className="section-description" data-reveal>{description}</p> : null}
     </div>
   );
 }

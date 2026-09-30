@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Logo from "@/components/ui/Logo";
+import { READY_EVENT } from "@/components/ui/ScrollReveal";
 
 export default function LoadingScreen() {
   const [progress, setProgress] = useState(0);
@@ -31,10 +32,16 @@ export default function LoadingScreen() {
       const fadeTimeout = setTimeout(() => setIsFadingOut(true), 300);
       // Remove completely from DOM after animation completes
       const hideTimeout = setTimeout(() => setIsHidden(true), 800);
+      // Let the page entrance animations begin as the overlay starts fading
+      const readyTimeout = setTimeout(() => {
+        document.documentElement.classList.add("is-ready");
+        window.dispatchEvent(new Event(READY_EVENT));
+      }, 450);
 
       return () => {
         clearTimeout(fadeTimeout);
         clearTimeout(hideTimeout);
+        clearTimeout(readyTimeout);
       };
     }
   }, [progress]);
@@ -44,6 +51,7 @@ export default function LoadingScreen() {
   return (
     <div
       data-cursor="native"
+      data-loading-screen
       className={`fixed inset-0 z-100 flex flex-col items-center justify-between bg-black px-8 py-12 text-white transition-opacity duration-500 ease-in-out ${
         isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}

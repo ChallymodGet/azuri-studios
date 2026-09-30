@@ -1,4 +1,5 @@
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import Navbar from "@/components/layout/Navbar";
 import {
   AboutSection,
@@ -19,6 +20,7 @@ export default function Home() {
     <main className="relative min-h-screen pt-20">
       {/* 1. Full-screen animated overlay */}
       <LoadingScreen />
+      <ScrollReveal />
 
       {/* 2. Top sticky/fixed navbar */}
       <Navbar />
