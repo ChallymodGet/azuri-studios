@@ -1284,13 +1284,19 @@ summary {
 
 .footer-wordmark {
   position: absolute;
-  bottom: -55px;
+  /* Lift by the amount the glyphs hang below the line box, so overflow:hidden doesn't crop them */
+  bottom: 0.2em;
   left: 50%;
+  z-index: 0;
+  margin: 0;
   color: rgba(255, 255, 255, 0.09);
-  font-size: clamp(90px, 14vw, 200px);
+  /* ~6.7ch of this face fits "azuristudios.co"; size it to the viewport so it is never cropped */
+  font-size: min(220px, calc((100vw - 32px) / 6.7));
   font-weight: 800;
+  line-height: 1;
   letter-spacing: -0.06em;
   white-space: nowrap;
+  pointer-events: none;
   transform: translateX(-50%);
 }
 
