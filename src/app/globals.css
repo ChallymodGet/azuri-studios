@@ -128,6 +128,89 @@ summary {
   margin-inline: auto;
 }
 
+/* ---- Custom pointer (see components/ui/CustomCursor.tsx) ---- */
+
+/* Hide the native arrow while the custom pointer is active... */
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none;
+}
+
+/* ...except where the browser's own cursor is more useful */
+.has-custom-cursor input,
+.has-custom-cursor textarea,
+.has-custom-cursor select,
+.has-custom-cursor [contenteditable="true"],
+.has-custom-cursor [data-cursor="native"],
+.has-custom-cursor [data-cursor="native"] * {
+  cursor: auto;
+}
+
+.cursor {
+  --cursor-size: 48px;
+  position: fixed;
+  top: calc(var(--cursor-size) / -2);
+  left: calc(var(--cursor-size) / -2);
+  z-index: 9999;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  pointer-events: none;
+  /* White blended with "difference" shows a photographic negative of whatever is beneath */
+  mix-blend-mode: difference;
+  will-change: transform;
+  transition: opacity 160ms ease;
+}
+
+.cursor.is-hidden {
+  opacity: 0;
+}
+
+.cursor-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: white;
+  filter: blur(7px);
+  transition: transform 180ms ease;
+}
+
+.cursor.is-hover .cursor-ring {
+  transform: scale(1.5);
+}
+
+.cursor.is-pressed .cursor-ring {
+  transform: scale(0.75);
+}
+
+/*
+ * Crisp plus glyph. Black inside the "difference" group cancels the inversion,
+ * so the plus shows the page's true colour and always contrasts with the
+ * inverted ring around it.
+ */
+.cursor-plus::before,
+.cursor-plus::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  content: "";
+  border-radius: 1px;
+  background: black;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .cursor-ring {
+    transition: none;
+  }
+}
+
 .site-header {
   z-index: 20;
   background: var(--azuri-header-bg);

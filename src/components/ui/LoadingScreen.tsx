@@ -43,6 +43,7 @@ export default function LoadingScreen() {
 
   return (
     <div
+      data-cursor="native"
       className={`fixed inset-0 z-100 flex flex-col items-center justify-between bg-black px-8 py-12 text-white transition-opacity duration-500 ease-in-out ${
         isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
