@@ -67,7 +67,7 @@ export default function Navbar() {
     >
       <div className="site-container navbar-inner flex items-center justify-between w-full mx-auto py-0! my-0!">
         <Link href="/" className="brand" aria-label="Azuri Studios home">
-          <Logo className="brand-logo" />
+          <Logo className="brand-logo navbar-logo" />
         </Link>
 
         <nav className="desktop-nav" aria-label="Primary navigation">

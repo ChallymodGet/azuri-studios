@@ -203,10 +203,22 @@ summary {
 }
 
 /* Inline SVG logo: the wordmark inherits `color`, so it adapts to light/dark/footer */
-.brand-logo {
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+}
+
+.logo-mark,
+.logo-word {
   display: block;
-  height: 48px;
+  height: 100%;
   width: auto;
+}
+
+.brand-logo {
+  height: 48px;
 }
 
 .desktop-nav {
@@ -1393,7 +1405,24 @@ summary {
     width: 18px;
     height: 18px;
   }
+}
 
+/* Phones: the full wordmark plus the menu button no longer fits the bar */
+@media (max-width: 560px) {
+  .navbar-logo .logo-word {
+    display: none;
+  }
+
+  .navbar-inner.site-container {
+    width: 100%;
+  }
+
+  .navbar-inner {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 700px) {
   .hero {
     min-height: 1040px;
   }
