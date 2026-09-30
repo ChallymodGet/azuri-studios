@@ -259,22 +259,14 @@ export function AboutSection() {
           ))}
         </div>
 
-        {/* Updated Stats Container with Inline Size Overrides */}
-        <div className="stats grid grid-cols-2 md:grid-cols-4 gap-6 p-8 rounded-3xl bg-blue-600 text-white text-center">
+        {/* Always four-up; number and label sizes scale with the viewport (see .stats in globals.css) */}
+        <div className="stats">
           {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center">
-              <strong
-                style={{ fontSize: "52px", lineHeight: "1", fontWeight: "800" }}
-                className="text-white block tracking-tight"
-              >
+            <div key={stat.label}>
+              <strong>
                 <AnimatedCounter target={stat.target} suffix={stat.suffix} />
               </strong>
-              <p
-                style={{ fontSize: "15px", marginTop: "8px" }}
-                className="font-medium text-white/90 block m-0 p-0"
-              >
-                {stat.label}
-              </p>
+              <p>{stat.label}</p>
             </div>
           ))}
         </div>
