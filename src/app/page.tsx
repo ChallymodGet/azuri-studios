@@ -17,7 +17,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen pt-20">
+    <main className="relative min-h-screen overflow-x-clip pt-20">
       {/* 1. Full-screen animated overlay */}
       <LoadingScreen />
       <ScrollReveal />

@@ -103,10 +103,15 @@ h3 em,
 
 html {
   scroll-behavior: smooth;
+  /* Stop wide descendants (marquee, comparison table, reveal offsets) from panning the page sideways */
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;
+  max-width: 100%;
   background: var(--azuri-bg);
   color: var(--azuri-ink);
   font-family: var(--font-geist-sans), Arial, sans-serif;
@@ -149,8 +154,8 @@ summary {
 .cursor {
   --cursor-size: 48px;
   position: fixed;
-  top: calc(var(--cursor-size) / -2);
-  left: calc(var(--cursor-size) / -2);
+  top: 0;
+  left: 0;
   z-index: 9999;
   width: var(--cursor-size);
   height: var(--cursor-size);
@@ -530,12 +535,15 @@ summary {
 .trusted-strip {
   position: absolute;
   inset: auto 0 0;
+  width: 100%;
+  max-width: 100%;
   min-height: 98px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(24px, 5vw, 80px);
-  padding: 20px 40px;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 20px 16px;
+  overflow: hidden;
   background: var(--azuri-glass-bg);
   color: var(--azuri-muted);
   backdrop-filter: blur(16px);
@@ -824,7 +832,12 @@ summary {
 }
 
 .comparison-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .comparison-grid {
@@ -1656,20 +1669,19 @@ summary {
   clip-path: inset(100% 0 0 0 round 25px);
 }
 
-/* About photos start as a rotated stack and fan out into a row */
+/* About photos fan out in place (no large horizontal % offsets — those widened the page) */
 .js-reveal .about-photo[data-reveal="fan"] {
-  translate: 0 40px;
-  scale: 0.9;
+  translate: 0 32px;
+  scale: 0.92;
+  rotate: 0deg;
 }
 
 .js-reveal .about-photo[data-reveal="fan"]:first-child {
-  translate: 70% 40px;
-  rotate: -10deg;
+  rotate: -8deg;
 }
 
 .js-reveal .about-photo[data-reveal="fan"]:last-child {
-  translate: -70% 40px;
-  rotate: 10deg;
+  rotate: 8deg;
 }
 
 .js-reveal [data-reveal].is-in {
@@ -1823,15 +1835,18 @@ summary {
 /* ---- Trusted-by marquee ---- */
 
 .marquee {
-  flex: 1 1 240px;
+  flex: 1 1 0;
   min-width: 0;
+  max-width: 100%;
   overflow: hidden;
+  contain: content;
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
+  will-change: transform;
   animation: marquee 32s linear infinite;
 }
 

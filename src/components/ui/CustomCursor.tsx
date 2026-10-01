@@ -33,9 +33,11 @@ export default function CustomCursor() {
     let x = 0;
     let y = 0;
 
+    const half = 24; /* half of 48px cursor — keeps the disc centered without negative layout coords */
+
     const render = () => {
       frame = 0;
-      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      cursor.style.transform = `translate3d(${x - half}px, ${y - half}px, 0)`;
     };
 
     const updateTargetState = (target: EventTarget | null) => {

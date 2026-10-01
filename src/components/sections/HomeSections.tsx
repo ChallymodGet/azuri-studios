@@ -264,7 +264,7 @@ export function AboutSection() {
         </div>
 
         {/* Photos fan out from a rotated stack (see .about-photo) */}
-        <div className="about-images flex items-center justify-center gap-4 my-8" data-reveal-group="110">
+        <div className="about-images flex items-center justify-center gap-4 my-8 overflow-hidden" data-reveal-group="110">
           {[1, 2, 3].map((image) => (
             <div
               key={image}
