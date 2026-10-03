@@ -1197,38 +1197,62 @@ summary {
 
 .floating-tile {
   position: absolute;
+  z-index: 0;
   display: grid;
   width: 86px;
-  height: 76px;
+  height: 86px;
   place-items: center;
   border-radius: 22px;
-  background: black;
   color: white;
-  filter: blur(1.5px);
-  box-shadow: inset 0 8px 10px white, 0 4px 8px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
   opacity: var(--tile-opacity, 1);
 }
 
-.dark .floating-tile {
-  background: #1c1c2a;
-  box-shadow: inset 0 8px 10px rgba(255, 255, 255, 0.18), 0 4px 8px rgba(0, 0, 0, 0.5);
+/* Blurred tile body; icon SVG above stays crisp */
+.floating-tile::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  border-radius: inherit;
+  background: #050505;
+  box-shadow:
+    inset 0 10px 14px rgba(255, 255, 255, 0.92),
+    0 6px 14px rgba(0, 0, 0, 0.22);
+  filter: blur(1.25px);
 }
 
-.tile-one {
-  top: -18px;
-  left: 48%;
+.floating-tile-svg {
+  position: relative;
+  z-index: 1;
+  width: 38px;
+  height: 38px;
 }
 
-.tile-two {
-  top: 44%;
-  left: 10%;
-  transform: rotate(-12deg);
+.dark .floating-tile::before {
+  background: #101018;
+  box-shadow:
+    inset 0 10px 14px rgba(255, 255, 255, 0.2),
+    0 6px 14px rgba(0, 0, 0, 0.45);
 }
 
-.tile-three {
-  top: 44%;
-  right: 10%;
-  transform: rotate(12deg);
+/* Figma: Android top-center (slightly clipped), Apple lower-left, globe lower-right */
+.tile-android {
+  top: -32px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+.tile-apple {
+  top: 42%;
+  left: clamp(12px, 8vw, 10%);
+  rotate: -14deg;
+}
+
+.tile-globe {
+  top: 42%;
+  right: clamp(12px, 8vw, 10%);
+  rotate: 14deg;
 }
 
 .site-footer {
@@ -2137,11 +2161,11 @@ summary {
   animation: tile-float var(--float-duration, 6s) ease-in-out calc(var(--reveal-delay, 0ms) + 900ms) infinite;
 }
 
-.tile-two {
+.tile-apple {
   --float-duration: 7.2s;
 }
 
-.tile-three {
+.tile-globe {
   --float-duration: 8.1s;
 }
 

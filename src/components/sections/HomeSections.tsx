@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { CtaFloatingTiles } from "@/components/ui/CtaFloatingTiles";
 import Logo from "@/components/ui/Logo";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
@@ -610,10 +611,7 @@ export function FaqSection() {
 export function GetStartedSection() {
   return (
     <section id="contact" className="section cta-section" data-reveal-group="120">
-      {/* Tiles drop in, then bob forever (see .floating-tile) */}
-      <div className="floating-tile tile-one" data-reveal="drop" data-delay="200">●</div>
-      <div className="floating-tile tile-two" data-reveal="drop" data-delay="340">◆</div>
-      <div className="floating-tile tile-three" data-reveal="drop" data-delay="480">✦</div>
+      <CtaFloatingTiles />
       <div className="site-container">
         <SectionHeading
           eyebrow="GET STARTED"
