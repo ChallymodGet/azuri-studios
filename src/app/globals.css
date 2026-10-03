@@ -1185,6 +1185,11 @@ summary {
   text-align: center;
 }
 
+.cta-section .site-container {
+  position: relative;
+  z-index: 2;
+}
+
 .cta-section .section-heading {
   margin-bottom: 32px;
 }
@@ -1335,6 +1340,33 @@ summary {
 }
 
 @media (max-width: 960px) {
+  .floating-tile {
+    width: 68px;
+    height: 68px;
+    border-radius: 18px;
+  }
+
+  .floating-tile-svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tile-android {
+    top: 6px;
+  }
+
+  .tile-apple {
+    top: 30%;
+    left: -4px;
+    rotate: -12deg;
+  }
+
+  .tile-globe {
+    top: 34%;
+    right: -4px;
+    rotate: 12deg;
+  }
+
   .desktop-nav {
     display: none;
   }
@@ -1581,8 +1613,48 @@ summary {
     font-size: 17px;
   }
 
+  .cta-section {
+    /* Room for the top Android tile without crowding the nav */
+    padding-top: clamp(80px, 22vw, 104px);
+  }
+
   .floating-tile {
-    --tile-opacity: 0.35;
+    width: 56px;
+    height: 56px;
+    border-radius: 15px;
+    --tile-opacity: 0.9;
+  }
+
+  .floating-tile::before {
+    filter: blur(0.75px);
+  }
+
+  .floating-tile-svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .tile-android {
+    top: 12px;
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  /* Sit beside the headline; partial clip at the edges keeps copy readable */
+  .tile-apple {
+    top: 5.5rem;
+    left: -10px;
+    rotate: -12deg;
+  }
+
+  .tile-globe {
+    top: 7.25rem;
+    right: -10px;
+    rotate: 12deg;
+  }
+
+  .js-reveal .floating-tile[data-reveal].is-in {
+    animation: none;
   }
 
   .footer-grid {
