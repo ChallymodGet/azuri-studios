@@ -773,6 +773,11 @@ summary {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  align-items: flex-start;
+}
+
+.project-case-study {
+  margin-top: 10px;
 }
 
 .project-meta b {

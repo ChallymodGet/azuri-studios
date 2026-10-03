@@ -1,6 +1,7 @@
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import Navbar from "@/components/layout/Navbar";
+import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import {
   AboutSection,
   FaqSection,
@@ -9,35 +10,35 @@ import {
   HeroSection,
   PricingSection,
   ProcessSection,
-  ProjectsSection,
   ServicesSection,
   TestimonialsSection,
   WhyChooseUsSection,
 } from "@/components/sections/HomeSections";
+import { getSiteContent } from "@/lib/content/get-site-content";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const content = await getSiteContent();
+
   return (
     <main className="relative min-h-screen overflow-x-clip pt-20">
-      {/* 1. Full-screen animated overlay */}
       <LoadingScreen />
       <ScrollReveal />
 
-      {/* 2. Top sticky/fixed navbar */}
       <Navbar />
 
-      {/* 3. Page Sections */}
       <HeroSection />
-      <AboutSection />
-      <ServicesSection />
+      <AboutSection stats={content.stats} />
+      <ServicesSection services={content.services} />
       <ProcessSection />
-      <ProjectsSection />
+      <ProjectsSection projects={content.projects} />
       <WhyChooseUsSection />
       <PricingSection />
-      <TestimonialsSection />
-      <FaqSection />
+      <TestimonialsSection testimonials={content.testimonials} />
+      <FaqSection faqs={content.faqs} />
       <GetStartedSection />
 
-      {/* 4. Footer */}
       <Footer />
     </main>
   );

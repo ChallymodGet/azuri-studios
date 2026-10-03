@@ -6,14 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cms:import": "sanity dataset import sanity/import/seed.ndjson production --replace"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.1.1",
     "next": "16.3.5",
+    "next-sanity": "^13.3.4",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sanity": "^6.17.0"
   },
   "devDependencies": {
+    "@sanity/vision": "^6.17.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

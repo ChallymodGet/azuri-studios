@@ -1,4 +1,4 @@
-/** Site-wide links and contact (Phase 1 — no CMS/backend). */
+/** Site-wide links and contact. Homepage content lives in Sanity (see getSiteContent). */
 
 export const CONTACT_EMAIL = "hello@azuristudio.co";
 
