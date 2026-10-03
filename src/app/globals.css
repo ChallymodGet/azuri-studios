@@ -1178,6 +1178,8 @@ summary {
 .cta-section {
   position: relative;
   overflow: hidden;
+  /* Extra headroom so the top Android tile is not clipped by overflow:hidden */
+  padding-top: clamp(112px, 11vw, 132px);
   background:
     radial-gradient(circle at 20% 50%, rgba(21, 93, 252, 0.15), transparent 36%),
     radial-gradient(circle at 80% 50%, rgba(21, 93, 252, 0.15), transparent 36%),
@@ -1241,9 +1243,9 @@ summary {
     0 6px 14px rgba(0, 0, 0, 0.45);
 }
 
-/* Figma: Android top-center (slightly clipped), Apple lower-left, globe lower-right */
+/* Android top-center; Apple lower-left, globe lower-right */
 .tile-android {
-  top: -32px;
+  top: 28px;
   left: 50%;
   translate: -50% 0;
 }
