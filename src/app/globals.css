@@ -1202,6 +1202,75 @@ summary {
   font-size: 14px;
 }
 
+/* ---- /book scheduling page ---- */
+
+.book-page {
+  max-width: 920px;
+}
+
+.book-page-title {
+  margin: 0 0 12px;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 650;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.book-page-lead {
+  margin: 0 0 32px;
+  max-width: 560px;
+  color: var(--azuri-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.book-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 28px;
+  border: 1px dashed var(--azuri-line);
+  border-radius: 24px;
+  background: var(--azuri-surface);
+}
+
+.book-fallback-hint {
+  margin: 0;
+  color: var(--azuri-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.book-fallback-hint code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--azuri-soft-fill);
+  font-size: 13px;
+}
+
+.book-embed-host,
+.book-iframe {
+  width: 100%;
+  min-height: 720px;
+  border: 0;
+  border-radius: 20px;
+  background: var(--azuri-surface);
+  box-shadow: 0 8px 32px var(--azuri-shadow-soft);
+}
+
+.book-external-link {
+  margin: 20px 0 0;
+  color: var(--azuri-muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.book-external-link a {
+  color: var(--azuri-blue);
+  font-weight: 600;
+}
+
 .floating-tile {
   position: absolute;
   z-index: 0;

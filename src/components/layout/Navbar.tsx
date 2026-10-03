@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import Logo from "@/components/ui/Logo";
+import { BOOKING_PATH } from "@/lib/site-config";
 
 interface NavItem {
   label: string;
@@ -80,7 +81,7 @@ export default function Navbar() {
 
         <div className="navbar-actions">
           <ThemeToggle />
-          <Link href="#contact" className="button button-primary navbar-cta">
+          <Link href={BOOKING_PATH} className="button button-primary navbar-cta">
             Get started
           </Link>
           <button

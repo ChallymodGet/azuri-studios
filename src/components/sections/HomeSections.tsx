@@ -6,6 +6,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { CtaFloatingTiles } from "@/components/ui/CtaFloatingTiles";
 import Logo from "@/components/ui/Logo";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { BOOKING_PATH } from "@/lib/site-config";
 
 interface ServiceItem {
   id: string;
@@ -189,7 +190,7 @@ export function HeroSection() {
         </p>
         <div className="button-row hero-enter" style={{ "--enter-delay": "660ms" } as React.CSSProperties}>
           <Link href="#projects" className="button button-secondary">See projects</Link>
-          <Link href="#contact" className="button button-primary">Book a call</Link>
+          <Link href={BOOKING_PATH} className="button button-primary">Book a call</Link>
         </div>
         <div className="client-proof hero-enter" style={{ "--enter-delay": "800ms" } as React.CSSProperties}>
           <span className="avatar-stack">
@@ -472,7 +473,7 @@ export function ProjectsSection() {
         />
         <div className="project-toolbar" data-reveal-group="60">
           <div>{filters.map((filter) => <button className={filter === "Landing Page" ? "active" : ""} key={filter} data-reveal="pop">{filter}</button>)}</div>
-          <Link href="#contact" className="button button-primary button-small" data-reveal="right">See all projects ↗</Link>
+          <Link href="#projects" className="button button-primary button-small" data-reveal="right">See all projects ↗</Link>
         </div>
         <article className="featured-project" data-reveal-group="120">
           <div className="project-meta" data-reveal><div><strong>Bloom</strong><span>Landing Page · 2025</span></div><b>1/<span>5</span></b></div>
@@ -540,7 +541,7 @@ export function PricingSection() {
                 {plan.features.map((feature, i) => <li key={feature} data-reveal="left" data-delay={String(cardDelay + 300 + i * 60)}><span>✓</span>{feature}</li>)}
                 {plan.unavailable?.map((feature, i) => <li className="unavailable" key={feature} data-reveal="left" data-delay={String(cardDelay + 300 + (plan.features.length + i) * 60)}><span>×</span>{feature}</li>)}
               </ul>
-              <Link href="#contact" className={`button ${plan.featured ? "button-light" : "button-primary"}`}>Get started</Link>
+              <Link href={BOOKING_PATH} className={`button ${plan.featured ? "button-light" : "button-primary"}`}>Get started</Link>
             </article>
             );
           })}
@@ -601,7 +602,7 @@ export function FaqSection() {
         </div>
         <div className="faq-cta" data-reveal="scale">
           <div><strong>Can&apos;t find what you need?</strong><span>Book a free 30-min call and we&apos;ll walk you through everything.</span></div>
-          <Link href="#contact" className="button button-primary">Book a call</Link>
+          <Link href={BOOKING_PATH} className="button button-primary">Book a call</Link>
         </div>
       </div>
     </section>
@@ -620,7 +621,7 @@ export function GetStartedSection() {
         />
         <div className="button-row">
           <Link href="#projects" className="button button-secondary" data-reveal="pop" data-delay="420">See projects</Link>
-          <a href="mailto:hello@azuristudio.co" className="button button-primary" data-reveal="pop" data-delay="500">Book a call</a>
+          <Link href={BOOKING_PATH} className="button button-primary" data-reveal="pop" data-delay="500">Book a call</Link>
         </div>
         <p className="cta-note" data-reveal data-delay="620">No long-term contracts · Pause or cancel anytime · 2-week money-back guarantee</p>
       </div>
